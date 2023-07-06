@@ -20,11 +20,11 @@ try:
 
         valor_selecionado = int(message)  # Converter a mensagem em um número inteiro
 
-        matriz = [[0] * 4 for _ in range(4)]  # Inicializar a matriz 4x4 com zeros
-        total_1s = min(valor_selecionado, 16)  # Limitar o total de 1s à dimensão da matriz
+        matriz = [[0] * 4 for _ in range(6)]  # Inicializar a matriz 6x4 com zeros
+        total_1s = min(valor_selecionado, 24)  # Limitar o total de 1s à dimensão da matriz
 
         for i in range(total_1s):
-            linha = 3 - (i // 4)  # Calcular o índice da linha de baixo para cima
+            linha = 5 - (i // 4)  # Calcular o índice da linha de baixo para cima
             coluna = i % 4  # Calcular o índice da coluna
             matriz[linha][coluna] = 1
 
