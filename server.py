@@ -44,6 +44,12 @@ try:
         # Calcular a porcentagem de preenchimento da matriz
         porcentagem = (total_1s / 24) * 100
 
+        # Verificar se a matriz está 100% preenchida
+        if porcentagem == 100:
+            print("Matriz 100% preenchida. Reinicializando...")
+            matriz = [[0] * 4 for _ in range(6)]  # Zerar a matriz
+            client_socket.sendall("MATRIZ_ZERADA".encode())
+
         # Enviar a porcentagem para o terceiro cliente (caminhão)
         truck_socket.sendall(f"{porcentagem}%".encode())
 
