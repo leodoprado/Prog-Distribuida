@@ -22,14 +22,16 @@ try:
         # Verificar se a matriz foi zerada no servidor
         if modified_message == "MATRIZ_ZERADA":
             print("Matriz zerada. Reiniciando o loop.")
-            valor = 1  # Reiniciar o valor para 1
+            valor = 0  # Reiniciar o valor para 1
 
         valor += 1
 
-        time.sleep(3)  # Atraso de 3 segundos entre os envios
+        time.sleep(2)  # Atraso de 2 segundos entre os envios
 
-except ConnectionRefusedError:
-    print("Não foi possível conectar ao servidor.")
+        # Verificar se foi recebido o comando para zerar a matriz e reiniciar o loop
+        if modified_message == "ZERAR_MATRIZ":
+            print("Recebido comando para zerar a matriz. Reiniciando o loop.")
+            valor = 0  # Reiniciar o valor para 1
 
 finally:
     client_socket.close()

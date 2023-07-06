@@ -46,12 +46,12 @@ try:
 
         # Verificar se a matriz está 100% preenchida
         if porcentagem == 100:
-            print("Matriz 100% preenchida. Reinicializando...")
+            print("Lixeira 100% cheia. Solicitando caminhão...")
             matriz = [[0] * 4 for _ in range(6)]  # Zerar a matriz
             client_socket.sendall("MATRIZ_ZERADA".encode())
 
         # Enviar a porcentagem para o terceiro cliente (caminhão)
-        truck_socket.sendall(f"{porcentagem}%".encode())
+        truck_socket.sendall(f"{porcentagem}".encode())
 
         modified_message = message.upper()
 

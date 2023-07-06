@@ -13,7 +13,12 @@ try:
         porcentagem = client_socket.recv(1024).decode()
         if not porcentagem:
             break
+        porcentagem = round(float(porcentagem), 2)  # Arredonda a porcentagem para duas casas decimais
         print("Porcentagem de preenchimento da matriz:", porcentagem, "%")
+
+        if porcentagem == 100:
+            print("Lixeira 100%. Solicitando ao cliente para zerar a matriz e reiniciar o loop...")
+            client_socket.sendall("ZERAR_MATRIZ".encode())  # Envia comando para zerar a matriz
 
 finally:
     client_socket.close()
