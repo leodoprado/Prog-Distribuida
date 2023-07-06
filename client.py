@@ -1,7 +1,7 @@
 import socket
 import time
 
-server_ip = '192.168.0.53'  # IP da máquina do servidor
+server_ip = '192.168.192.95'  # IP da máquina do servidor
 server_port = 12345
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,20 +17,23 @@ try:
         client_socket.sendall(message.encode())
 
         modified_message = client_socket.recv(1024).decode()
-        print("String modificada:", modified_message)
+        print("Qtd de lixo inserido:", modified_message)
 
         # Verificar se a matriz foi zerada no servidor
-        if modified_message == "MATRIZ_ZERADA":
-            print("Matriz zerada. Reiniciando o loop.")
+        if modified_message == "LIMPEZA_CONCLUIDA":
+            print("O caminhão chegou para a coleta.")
             valor = 0  # Reiniciar o valor para 1
 
         valor += 1
 
-        time.sleep(2)  # Atraso de 2 segundos entre os envios
+        time.sleep(1)  # Atraso de 2 segundos entre os envios
 
         # Verificar se foi recebido o comando para zerar a matriz e reiniciar o loop
-        if modified_message == "ZERAR_MATRIZ":
-            print("Recebido comando para zerar a matriz. Reiniciando o loop.")
+        if modified_message == "LIMPEZA_CONCLUIDA":
+            time.sleep(2)
+            print("Aguardando o carregamento dos resíduos.")
+            time.sleep(4)
+            print("Limpeza 100% concluída!")
             valor = 0  # Reiniciar o valor para 1
 
 finally:

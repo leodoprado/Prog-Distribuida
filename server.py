@@ -1,6 +1,6 @@
 import socket
 
-server_ip = '192.168.0.53'  # IP da máquina do servidor
+server_ip = '192.168.192.95'  # IP da máquina do servidor
 server_port = 12345
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -14,15 +14,15 @@ try:
 
     # Receber conexão do primeiro cliente
     client_socket, client_address = server_socket.accept()
-    print("Conexão estabelecida com o primeiro cliente:", client_address)
+    print("Conexão estabelecida com a lixeira:", client_address)
 
     # Receber conexão do terceiro cliente
     truck_socket, truck_address = server_socket.accept()
-    print("Conexão estabelecida com o terceiro cliente (caminhão):", truck_address)
+    print("Conexão estabelecida com o caminhão:", truck_address)
 
     while True:
         message = client_socket.recv(1024).decode()
-        print("String recebida:", message)
+        print("Lixo inserido:", message)
 
         if not message:
             break
@@ -48,7 +48,7 @@ try:
         if porcentagem == 100:
             print("Lixeira 100% cheia. Solicitando caminhão...")
             matriz = [[0] * 4 for _ in range(6)]  # Zerar a matriz
-            client_socket.sendall("MATRIZ_ZERADA".encode())
+            client_socket.sendall("LIMPEZA_CONCLUIDA".encode())
 
         # Enviar a porcentagem para o terceiro cliente (caminhão)
         truck_socket.sendall(f"{porcentagem}".encode())
